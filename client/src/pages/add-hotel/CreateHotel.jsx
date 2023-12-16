@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useCreateHotelMutation } from "../../api/apiSlice";
+import Input from "../../components/form-input/Input";
 
 const CreateHotel = () => {
   const [createHotel] = useCreateHotelMutation();
@@ -15,7 +16,7 @@ const CreateHotel = () => {
       distance: "",
       title: "",
       desc: "",
-      cheapestPrice: 0,
+      cheapestPrice: "",
     },
     onSubmit: (values) => {
       createHotel(formik.values);
@@ -36,49 +37,25 @@ const CreateHotel = () => {
     <div>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <input
-            name="name"
-            placeholder="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name={"name"} value={formik.values.name} formik={formik} />
           <div className="errors">
             {formik.errors.name && formik.touched.name && formik.errors.name}
           </div>
         </div>
         <div>
-          <input
-            name="type"
-            placeholder="type"
-            value={formik.values.type}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name="type" value={formik.values.type} formik={formik} />
           <div className="errors">
             {formik.errors.type && formik.touched.type && formik.errors.type}
           </div>
         </div>
         <div>
-          <input
-            name="city"
-            placeholder="city"
-            value={formik.values.city}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name="city" value={formik.values.city} formik={formik} />
           <div className="errors">
             {formik.errors.city && formik.touched.city && formik.errors.city}
           </div>
         </div>
         <div>
-          <input
-            name="address"
-            placeholder="address"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name="address" value={formik.values.address} formik={formik} />
           <div className="errors">
             {formik.errors.address &&
               formik.touched.address &&
@@ -86,12 +63,10 @@ const CreateHotel = () => {
           </div>
         </div>
         <div>
-          <input
+          <Input
             name="distance"
-            placeholder="distance"
             value={formik.values.distance}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            formik={formik}
           />
           <div className="errors">
             {formik.errors.distance &&
@@ -100,36 +75,22 @@ const CreateHotel = () => {
           </div>
         </div>
         <div>
-          <input
-            name="title"
-            placeholder="title"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name="title" value={formik.values.title} formik={formik} />
           <div className="errors">
             {formik.errors.title && formik.touched.title && formik.errors.title}
           </div>
         </div>
         <div>
-          <input
-            name="desc"
-            placeholder="desc"
-            value={formik.values.desc}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <Input name="desc" value={formik.values.desc} formik={formik} />
           <div className="errors">
             {formik.errors.desc && formik.touched.desc && formik.errors.desc}
           </div>
         </div>
         <div>
-          <input
+          <Input
             name="cheapestPrice"
-            placeholder="cheapestPrice"
             value={formik.values.cheapestPrice}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            formik={formik}
           />
           <div className="errors">
             {formik.errors.cheapestPrice &&
