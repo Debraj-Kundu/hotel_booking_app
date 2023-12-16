@@ -1,15 +1,18 @@
 import { useFormik } from "formik";
-import React from "react";
 import * as Yup from "yup";
+import { useLoginMutation } from "../../api/apiSlice";
 
 const Login = () => {
+  const [login] = useLoginMutation();
+  
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      console.log("onSubmit: ", values);
+      login(formik.values);
     },
     validationSchema: Yup.object({
       email: Yup.string()
