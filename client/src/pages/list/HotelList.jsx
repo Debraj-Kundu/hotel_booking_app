@@ -1,24 +1,29 @@
 import React from "react";
-import { useGetHotelsQuery, useCreateHotelMutation } from "../../api/apiSlice";
-import { useCookies } from "react-cookie";
+import { useGetHotelsQuery } from "../../api/apiSlice";
+import { Link } from "react-router-dom";
+
+const linkStyle = { textDecoration: "none", color: "inherit" };
 
 const HotelList = () => {
-  const [cookies] = useCookies(["access_token"]);
-  console.log(cookies);
   const { data = [] } = useGetHotelsQuery();
-  const [createHotel] = useCreateHotelMutation();
-  const hotel = { name: "mera-hotel" };
-  const addHotel = () => {
-    createHotel(hotel);
-  };
+
   return (
     <div>
-      {data.map((item) => (
-        <div>
-          <h1>{item.name}</h1>
-        </div>
-      ))}
-      <button onClick={addHotel}>Add</button>
+      {data &&
+        data.map((item) => (
+          <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
+            <div>
+              <h1>{item.name}</h1>
+              <p>{item.type}</p>
+              <p>{item.city}</p>
+              <p>{item.address}</p>
+              <p>{item.distance}</p>
+              <p>{item.title}</p>
+              <p>{item.desc}</p>
+              <p>rating : {item.rating ?? "N/A"}</p>
+            </div>
+          </Link>
+        ))}
     </div>
   );
 };

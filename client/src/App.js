@@ -5,7 +5,8 @@ import HotelList from "./pages/list/HotelList";
 import Login from "./pages/user _auth/Login";
 import Register from "./pages/user _auth/Register";
 import { Routes, Route } from "react-router-dom";
-import Navbar from './components/navbar/Navbar'
+import Navbar from "./components/navbar/Navbar";
+import Hotel from "./pages/hotel/Hotel";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/add-hotel" element={<CreateHotel />} />
+        <Route path="/hotels" element={<HotelList />} />
+        <Route path="/hotel/:id" element={<Hotel />} />
       </Routes>
     </div>
   );

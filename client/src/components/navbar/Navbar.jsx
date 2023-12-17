@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="topLeft">
         <h1 className="topLogo">
           <Link to="/" style={linkStyle}>
-            <b>Booker</b>
+            <b>Bookaar</b>
           </Link>
         </h1>
       </div>
@@ -24,6 +24,11 @@ const Navbar = () => {
           <li className="topListItem">
             <Link to="/add-hotel" style={linkStyle}>
               <b>ADD HOTEL</b>
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link to="/hotels" style={linkStyle}>
+              <b>HOTELS</b>
             </Link>
           </li>
           <li className="topListItem">

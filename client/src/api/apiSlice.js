@@ -11,6 +11,9 @@ export const apiSlice = createApi({
       query: () => "hotels",
       providesTags: ["Hotels"],
     }),
+    getHotel: builder.query({
+      query: ({id}) => `hotels/${id}`,
+    }),
     createHotel: builder.mutation({
       query: (hotel) => ({
         url: "hotels",
@@ -30,5 +33,9 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetHotelsQuery, useCreateHotelMutation, useLoginMutation } =
-  apiSlice;
+export const {
+  useGetHotelsQuery,
+  useGetHotelQuery,
+  useCreateHotelMutation,
+  useLoginMutation,
+} = apiSlice;
