@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 
 const Hotel = () => {
   const id = useParams()
-  const { hotel } = useGetHotelQuery(id);
-  console.log(hotel);
-
+  const {data:hotel}  = useGetHotelQuery(id);
+  
+ 
   return (
     (hotel && <div key={hotel._id}>
         <h1>{hotel.name}</h1>
