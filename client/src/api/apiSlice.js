@@ -30,6 +30,13 @@ export const apiSlice = createApi({
         body: { ...user },
       }),
     }),
+    register: builder.mutation({
+      query: (user) => ({
+        url: "auth/register",
+        method: "POST",
+        body: { ...user },
+      }),
+    }),
   }),
 });
 
