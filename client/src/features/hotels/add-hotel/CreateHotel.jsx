@@ -1,8 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useCreateHotelMutation } from "../../api/apiSlice";
-import Input from "../../components/form-input/Input";
+import { useCreateHotelMutation } from "../hotelSlice";
+import Input from "../../../components/form-input/Input";
 
 const CreateHotel = () => {
   const [createHotel] = useCreateHotelMutation();

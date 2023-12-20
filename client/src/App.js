@@ -1,12 +1,12 @@
 import "./App.css";
-import CreateHotel from "./pages/add-hotel/CreateHotel";
+import CreateHotel from "./features/hotels/add-hotel/CreateHotel";
 import Home from "./pages/home/Home";
-import HotelList from "./pages/list/HotelList";
+import HotelList from "./features/hotels/list/HotelList";
 import Login from "./pages/user _auth/Login";
 import Register from "./pages/user _auth/Register";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Hotel from "./pages/hotel/Hotel";
+import Hotel from "./features/hotels/hotel/Hotel";
 
 function App() {
   return (

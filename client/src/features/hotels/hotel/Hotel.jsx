@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetHotelQuery } from "../../api/apiSlice";
+import { useGetHotelQuery } from "../hotelSlice";
 import { useParams } from "react-router-dom";
 
 

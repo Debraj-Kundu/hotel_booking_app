@@ -1,16 +1,29 @@
 import React from "react";
-import { useGetHotelsQuery } from "../../api/apiSlice";
+import { useGetHotelsQuery } from "../hotelSlice";
 import { Link } from "react-router-dom";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
 const HotelList = () => {
-  const { data = [] } = useGetHotelsQuery();
+  const {
+    data = [],
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetHotelsQuery();
 
+  let content;
+  if (isLoading)
+    content = <p>"Loading . . ."</p>
+  else if (isSuccess)
+    content = data
+  else if (isError)
+    content = <p>{error}</p>
   return (
     <div>
-      {data &&
-        data.map((item) => (
+      {content &&
+        content.map((item) => (
           <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
             <div>
               <h1>{item.name}</h1>

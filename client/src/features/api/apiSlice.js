@@ -7,21 +7,6 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL, credentials: "include" }),
   tagTypes: ["Hotels"],
   endpoints: (builder) => ({
-    getHotels: builder.query({
-      query: () => "hotels",
-      providesTags: ["Hotels"],
-    }),
-    getHotel: builder.query({
-      query: ({id}) => `hotels/${id}`,
-    }),
-    createHotel: builder.mutation({
-      query: (hotel) => ({
-        url: "hotels",
-        method: "POST",
-        body: { ...hotel },
-      }),
-      invalidatesTags: ["Hotels"],
-    }),
     //User
     login: builder.mutation({
       query: (user) => ({
@@ -41,8 +26,5 @@ export const apiSlice = createApi({
 });
 
 export const {
-  useGetHotelsQuery,
-  useGetHotelQuery,
-  useCreateHotelMutation,
   useLoginMutation,
 } = apiSlice;
