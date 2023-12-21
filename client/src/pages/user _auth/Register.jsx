@@ -1,8 +1,11 @@
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import { useRegisterMutation } from "../../features/users/userSlice";
 
 const Register = () => {
+  const [register] = useRegisterMutation();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -10,7 +13,7 @@ const Register = () => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log("onSubmit: ", values);
+      register(formik.values);
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Username is required"),

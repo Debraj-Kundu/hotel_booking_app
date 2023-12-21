@@ -1,5 +1,7 @@
 import { apiSlice } from "../api/apiSlice";
 
+//TODO: Entity Adapter 
+
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getHotels: builder.query({
@@ -17,6 +19,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Hotels"],
     }),
+    //TODO: Update Hotel query
+    //TODO: Delete Hotel query
   }),
 });
 
