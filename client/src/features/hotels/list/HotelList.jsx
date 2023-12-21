@@ -14,31 +14,26 @@ const HotelList = () => {
   } = useGetHotelsQuery();
 
   let content;
-  if (isLoading)
-    content = <p>"Loading . . ."</p>
+
+  if (isLoading) content = <p>"Loading . . ."</p>;
   else if (isSuccess)
-    content = data
-  else if (isError)
-    content = <p>{error}</p>
-  return (
-    <div>
-      {content &&
-        content.map((item) => (
-          <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
-            <div>
-              <h1>{item.name}</h1>
-              <p>{item.type}</p>
-              <p>{item.city}</p>
-              <p>{item.address}</p>
-              <p>{item.distance}</p>
-              <p>{item.title}</p>
-              <p>{item.desc}</p>
-              <p>rating : {item.rating ?? "N/A"}</p>
-            </div>
-          </Link>
-        ))}
-    </div>
-  );
+    content = data.map((item) => (
+      <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
+        <div>
+          <h1>{item.name}</h1>
+          <p>{item.type}</p>
+          <p>{item.city}</p>
+          <p>{item.address}</p>
+          <p>{item.distance}</p>
+          <p>{item.title}</p>
+          <p>{item.desc}</p>
+          <p>rating : {item.rating ?? "N/A"}</p>
+        </div>
+      </Link>
+    ));
+  else if (isError) content = <p>{error}</p>;
+
+  return <div>{content && content}</div>;
 };
 
 export default HotelList;

@@ -1,11 +1,4 @@
-import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
-
-const hotelsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.date.localeCompare(a.date)
-})
-
-const initialState = hotelsAdapter.getInitialState()
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -27,16 +20,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetHotelQuery, useGetHotelsQuery, useCreateHotelMutation } = extendedApiSlice;
-
-// export const {
-//     selectAll: selectAllHotels,
-//     selectById: SelectAllHotelsById,
-// } = {}
+export const { useGetHotelQuery, useGetHotelsQuery, useCreateHotelMutation } =
+  extendedApiSlice;
 
 export const selectHotelsResult = extendedApiSlice.endpoints.getHotels.select();
 
-const selectHotelsData = createSelector(
-  selectHotelsResult,
-  (hotelsResult) => hotelsResult.data
-);
