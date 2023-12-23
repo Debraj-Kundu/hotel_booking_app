@@ -1,8 +1,9 @@
 import React from 'react'
+import SearchBox from '../../components/searchbox/SearchBox'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <SearchBox/>
   )
 }
 
