@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetHotelsQuery } from "../hotelSlice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
 const HotelList = () => {
+  const location = useLocation();
+  const [city, setCity] = useState("");
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+  const [options, setOptions] = useState({
+    person: 1,
+    room: 1,
+  });
+  const [price, setPrice] = useState({
+    startPrice: 400,
+    endPrice: 10000,
+  });
+
   const {
     data = [],
     isLoading,
@@ -15,7 +33,7 @@ const HotelList = () => {
 
   let content;
 
-  if (isLoading) content = <p>"Loading . . ."</p>;
+  if (isLoading) content = <p>Loading . . .</p>;
   else if (isSuccess)
     content = data.map((item) => (
       <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
@@ -31,9 +49,9 @@ const HotelList = () => {
         </div>
       </Link>
     ));
-  else if (isError) content = <p>{error}</p>;
+  else if (isError) content = <p>{error.error}</p>;
 
-  return <div>{content && content}</div>;
+  return <div>{content}</div>;
 };
 
 export default HotelList;

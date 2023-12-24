@@ -1,10 +1,16 @@
-import React from 'react'
-import SearchBox from '../../components/searchbox/SearchBox'
+import React from "react";
+import HeaderSearchBox from "../../components/header-search/HeaderSearchBox";
+import HotelList from "../../features/hotels/list/HotelList";
 
 const Home = () => {
   return (
-    <SearchBox/>
-  )
-}
+    <>
+      <HeaderSearchBox />
+      <br/>
+      <br/>
+      {/* <HotelList /> */}
+    </>
+  );
+};
 
-export default Home
+export default Home;

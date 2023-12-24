@@ -12,7 +12,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
-const SearchBox = ({ type }) => {
+const HeaderSearchBox = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -22,18 +22,25 @@ const SearchBox = ({ type }) => {
       key: "selection",
     },
   ]);
-  
-  const [selectedDate, setSelectedDate] = useState("CheckIn - CheckOut")
+
+  const [touched, setTouched] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     person: 1,
     room: 1,
   });
-  const dateUI = `${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-        date[0].endDate,
-        "MM/dd/yyyy"
-      )}`;
+  const dateUI = `${format(date[0].startDate, "MMM/dd/yyyy")} to ${format(
+    date[0].endDate,
+    "MMM/dd/yyyy"
+  )}`;
   const navigate = useNavigate();
+
+  const getDateRange = () => {
+    return `${format(date[0].startDate, "MMM/dd/yyyy")} to ${format(
+      date[0].endDate,
+      "MMM/dd/yyyy"
+    )}`;
+  };
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -73,12 +80,15 @@ const SearchBox = ({ type }) => {
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
                 >
-                  {selectedDate}
+                  {touched ? getDateRange() : "CheckIn - CheckOut"}
                 </span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => {setDate([item.selection]); setSelectedDate(dateUI)}}
+                    onChange={(item) => {
+                      setDate([item.selection]);
+                      setTouched(true);
+                    }}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
@@ -152,4 +162,4 @@ const SearchBox = ({ type }) => {
   );
 };
 
-export default SearchBox;
+export default HeaderSearchBox;
