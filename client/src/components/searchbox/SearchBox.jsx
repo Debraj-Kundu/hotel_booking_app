@@ -22,16 +22,17 @@ const SearchBox = ({ type }) => {
       key: "selection",
     },
   ]);
+  
+  const [selectedDate, setSelectedDate] = useState("CheckIn - CheckOut")
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
+    person: 1,
     room: 1,
   });
-  const selectedDate = `${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-    date[0].endDate,
-    "MM/dd/yyyy"
-  )}`;
+  const dateUI = `${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+        date[0].endDate,
+        "MM/dd/yyyy"
+      )}`;
   const navigate = useNavigate();
 
   const handleOption = (name, operation) => {
@@ -72,12 +73,12 @@ const SearchBox = ({ type }) => {
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
                 >
-                  CheckIn - CheckOut
+                  {selectedDate}
                 </span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => {setDate([item.selection]); setSelectedDate(dateUI)}}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
@@ -90,46 +91,25 @@ const SearchBox = ({ type }) => {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
-                >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+                >{`${options.person} Person · ${options.room} room`}</span>
                 {openOptions && (
                   <div className="options">
                     <div className="optionItem">
-                      <span className="optionText">Adult</span>
+                      <span className="optionText">Person</span>
                       <div className="optionCounter">
                         <button
-                          disabled={options.adult <= 1}
+                          disabled={options.person <= 1}
                           className="optionCounterButton"
-                          onClick={() => handleOption("adult", "d")}
+                          onClick={() => handleOption("person", "d")}
                         >
                           -
                         </button>
                         <span className="optionCounterNumber">
-                          {options.adult}
+                          {options.person}
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption("adult", "i")}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                    <div className="optionItem">
-                      <span className="optionText">Children</span>
-                      <div className="optionCounter">
-                        <button
-                          disabled={options.children <= 0}
-                          className="optionCounterButton"
-                          onClick={() => handleOption("children", "d")}
-                        >
-                          -
-                        </button>
-                        <span className="optionCounterNumber">
-                          {options.children}
-                        </span>
-                        <button
-                          className="optionCounterButton"
-                          onClick={() => handleOption("children", "i")}
+                          onClick={() => handleOption("person", "i")}
                         >
                           +
                         </button>
