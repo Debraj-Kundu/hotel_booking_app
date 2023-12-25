@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import { useGetHotelsQuery } from "../hotelSlice";
 import { Link, useLocation } from "react-router-dom";
+import SearchBox from "../../../components/custom-search/SearchBox";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
 const HotelList = () => {
   const location = useLocation();
-  const [city, setCity] = useState("");
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-  const [options, setOptions] = useState({
-    person: 1,
-    room: 1,
-  });
+
+  const [city, setCity] = useState(location?.state?.destination);
+  const [date, setDate] = useState(location?.state?.date);
+  const [options, setOptions] = useState(location?.state?.options);
+  const [openDate, setOpenDate] = useState(false);
   const [price, setPrice] = useState({
     startPrice: 400,
     endPrice: 10000,
@@ -51,7 +45,18 @@ const HotelList = () => {
     ));
   else if (isError) content = <p>{error.error}</p>;
 
-  return <div>{content}</div>;
+  return (
+    <div>
+      <SearchBox
+        city={city}
+        date={date}
+        setDate={setDate}
+        options={options}
+        price={price}
+      />
+      {content}
+    </div>
+  );
 };
 
 export default HotelList;
