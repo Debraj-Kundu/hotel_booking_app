@@ -11,6 +11,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getHotel: builder.query({
       query: ({ id }) => `hotels/${id}`,
     }),
+    getHotelByParam: builder.query({
+      query: ({ key, value }) => `hotels?${key}=${value}`,
+    }),
     createHotel: builder.mutation({
       query: (hotel) => ({
         url: "hotels",
@@ -24,7 +27,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetHotelQuery, useGetHotelsQuery, useCreateHotelMutation } =
+export const { useGetHotelQuery, useGetHotelsQuery, useGetHotelByParamQuery, useCreateHotelMutation } =
   extendedApiSlice;
 
 export const selectHotelsResult = extendedApiSlice.endpoints.getHotels.select();
