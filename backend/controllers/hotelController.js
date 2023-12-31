@@ -48,6 +48,7 @@ const getHotel = async (req, res, next) => {
 
 const getHotels = async (req, res, next) => {
   try {
+    // console.log(req.query)
     const hotels = await Hotel.find();
     res.status(200).json(hotels);
   } catch (error) {

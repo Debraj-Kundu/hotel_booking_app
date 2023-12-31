@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { DateRange } from "react-date-range";
 import {
   faCalendarDays,
@@ -9,56 +9,101 @@ import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useGetHotelByParamQuery } from '../../features/hotels/hotelSlice';
+import "./searchStyle.css";
+import { useGetHotelByParamQuery } from "../../features/hotels/hotelSlice";
 
-const SearchBox = ({city, date, setDate, options, price}) => {
-  
+const SearchBox = ({ city, setCity, date, setDate, options, price }) => {
   const [openDate, setOpenDate] = useState(false);
   const [touched, setTouched] = useState(false);
-  const { data, isLoading, isSuccess, isError, error } =
-  useGetHotelByParamQuery({ key: "city", value: "delhi" });
+  // const { data, isLoading, isSuccess, isError, error } =
+  // useGetHotelByParamQuery({ key: "city", value: "delhi" });
 
   const getDateRange = () => {
-    if(date)  
+    if (date)
       return `${format(date[0].startDate, "MMM/dd/yyyy")} to ${format(
-      date[0].endDate,
-      "MMM/dd/yyyy"
-    )}`;
-    else
-        return "CheckIn - CheckOut"
+        date[0].endDate,
+        "MMM/dd/yyyy"
+      )}`;
+    else return "CheckIn - CheckOut";
   };
 
   return (
     <div>
-        {/* //TODO: Price Slider */}
-        {/* //TODO: Date */}
-        <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-                <span
-                  onClick={() => setOpenDate(!openDate)}
-                  className="headerSearchText"
-                >
-                  {getDateRange()}
-                </span>
-                {openDate && (
-                  <DateRange
-                    editableDateInputs={true}
-                    onChange={(item) => {
-                      setDate([item.selection]);
-                      setTouched(true);
-                    }}
-                    moveRangeOnFirstSelection={false}
-                    ranges={date}
-                    className="date"
-                    minDate={new Date()}
+      {/* //TODO: Price Slider */}
+      {/* //TODO: Date */}
+      <div className="listContainer">
+        <div className="listWrapper">
+          <div className="listSearch">
+            <h1 className="lsTitle">Search</h1>
+            <div className="lsItem">
+              <label>Destination</label>
+              <input placeholder={city} type="text" />
+            </div>
+            <div className="lsItem">
+              <label>Check-in Date</label>
+              <span onClick={() => setOpenDate(!openDate)}>
+                {getDateRange()}
+              </span>
+              {openDate && (
+                <DateRange
+                  onChange={(item) => setDate([item.selection])}
+                  minDate={new Date()}
+                  ranges={date}
+                />
+              )}
+            </div>
+            <div className="lsItem">
+              <label>Options</label>
+              <div className="lsOptions">
+                <div className="lsOptionItem">
+                  <span className="lsOptionText">
+                    Min price <small>per night</small>
+                  </span>
+                  <input type="number" className="lsOptionInput" />
+                </div>
+                <div className="lsOptionItem">
+                  <span className="lsOptionText">
+                    Max price <small>per night</small>
+                  </span>
+                  <input type="number" className="lsOptionInput" />
+                </div>
+                {/* <div className="lsOptionItem">
+                  <span className="lsOptionText">Adult</span>
+                  <input
+                    type="number"
+                    min={1}
+                    className="lsOptionInput"
+                    placeholder={options.adult}
                   />
-                )}
+                </div>
+                <div className="lsOptionItem">
+                  <span className="lsOptionText">Children</span>
+                  <input
+                    type="number"
+                    min={0}
+                    className="lsOptionInput"
+                    placeholder={options.children}
+                  />
+                </div>
+                <div className="lsOptionItem">
+                  <span className="lsOptionText">Room</span>
+                  <input
+                    type="number"
+                    min={1}
+                    className="lsOptionInput"
+                    placeholder={options.room}
+                  />
+                </div> */}
               </div>
-        {/* //TODO: City */}
-        <h2>{city}</h2>
-        {/* //TODO: Type */}
+            </div>
+            <button>Search</button>
+          </div>
+        </div>
+      </div>
+      {/* //TODO: City */}
+      {/* //TODO: Type */}
     </div>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;

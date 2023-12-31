@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGetHotelsQuery } from "../hotelSlice";
 import { Link, useLocation } from "react-router-dom";
 import SearchBox from "../../../components/custom-search/SearchBox";
+import "./ListStyle.css";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
@@ -46,15 +47,16 @@ const HotelList = () => {
   else if (isError) content = <p>{error.error}</p>;
 
   return (
-    <div>
+    <div className="list">
       <SearchBox
         city={city}
+        setCity={setCity}
         date={date}
         setDate={setDate}
         options={options}
         price={price}
       />
-      {content}
+      <div>{content}</div>
     </div>
   );
 };
