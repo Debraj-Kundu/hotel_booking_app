@@ -3,6 +3,7 @@ import { useGetHotelsQuery } from "../hotelSlice";
 import { Link, useLocation } from "react-router-dom";
 import SearchBox from "../../../components/custom-search/SearchBox";
 import "./ListStyle.css";
+import SearchItem from "../../../components/searched-hotel/SearchItem";
 
 const linkStyle = { textDecoration: "none", color: "inherit" };
 
@@ -31,8 +32,8 @@ const HotelList = () => {
   if (isLoading) content = <p>Loading . . .</p>;
   else if (isSuccess)
     content = data.map((item) => (
-      <Link to={`/hotel/${item._id}`} key={item._id} style={linkStyle}>
-        <div>
+      <Link to={`/hotel/${item._id}`} className="listResult" key={item._id} style={linkStyle}>
+        {/* <div>
           <h1>{item.name}</h1>
           <p>{item.type}</p>
           <p>{item.city}</p>
@@ -41,7 +42,8 @@ const HotelList = () => {
           <p>{item.title}</p>
           <p>{item.desc}</p>
           <p>rating : {item.rating ?? "N/A"}</p>
-        </div>
+        </div> */}
+        <SearchItem hotel={item}/>
       </Link>
     ));
   else if (isError) content = <p>{error.error}</p>;
